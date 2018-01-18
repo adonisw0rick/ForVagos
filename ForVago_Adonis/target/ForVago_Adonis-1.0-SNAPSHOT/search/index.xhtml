@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/publicTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="content">
+        <div class="formulario">
+        <h:form style="background-color: orange;">
+<div style="text-align: center;">
+    <p:outputLabel for="busqueda" value="Encuentra tu hotelito con las mejores ofertas" ><p></p></p:outputLabel>
+    <p:inputText id="busqueda" size="100" style="text-align: center;" placeholder="Destino, nombre del alojamiento o dirección"></p:inputText>
+     </div><br/><br/>
+        <p:outputLabel for="provincias" value="Provincias(Basic)" />
+        <p:selectOneMenu  id="provincias" value="#{hotelSearchBean.id_provincia}" style="width:125px">
+<f:selectItems value="#{hotelSearchBean.provincias}" var="d"
+               itemLabel="#{d.nombre}" itemValue="#{d.id_provincia}"/>
+<p:ajax listener="#{hotelSearchBean.getMunicipios()}" update="car"/>
+
+        </p:selectOneMenu>
+ 
+        <p:outputLabel for="car" value="Municipios(Grouping:) " />
+        <p:selectOneMenu id="car" value="#{hotelSearchBean.id_municipio}">
+            <f:selectItems value="#{hotelSearchBean.municipios}" var="c"
+                           itemLabel="#{c.nombre}" itemValue="#{c.id_municipio}"/>
+            <p:ajax listener="#{hotelSearchBean.getMunicipios()}" update="display"/>
+        </p:selectOneMenu>
+        <br/><br/>
+        <p:outputLabel  for="entrada" value="Fecha de entrada" style="margin-left: 34px"/>
+        <p:inputText id="entrada" type="date" style="margin-left: 15px"></p:inputText>
+        <p:outputLabel for="salida" value="Fecha de salida" style="margin-left: 35px"/>
+        <p:inputText id="salida" type="date" style="margin-left: 15px"></p:inputText>
+        <br/><br/>
+        <p:outputLabel  for="hab" value="Habitaciones" style="margin-left: 35px"/>
+        <p:inputNumber size="3" id="hab" style="margin-left: 15px"></p:inputNumber>
+        <p:outputLabel  for="adul" value="Adultos" style="margin-left: 35px"/>
+        <p:inputNumber size="3" id="adul" style="margin-left: 15px"></p:inputNumber>
+        <p:outputLabel  for="child" value="Niños" style="margin-left: 35px"/>
+        <p:inputNumber size="3" id="child" style="margin-left: 15px"></p:inputNumber>
+         <br/><br/>
+        <h:selectOneRadio style="margin-left: 35px" value="red">
+   	<f:selectItem itemValue="Red" itemLabel="Residente Canario / Balear" />
+   	<f:selectItem itemValue="Green" itemLabel="Mayor de 65 años" />
+        </h:selectOneRadio>
+        <p:button href="searchResults.xhtml" value="GO!"></p:button>
+    <p:commandButton style="margin-left: 35px; margin:2em;" value="Buscar" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-check" />
+    <h:commandButton value="Insertar" action="searchResults"/>
+    <p:dialog header="Values" modal="true" showEffect="bounce" widgetVar="dlg" resizable="true">
+        <p:panelGrid columns="2" id="display" columnClasses="label,value">
+            <h:outputText value="Provincias:" />
+            <h:outputText value="#{hotelSearchBean.getId_provincia()}" />
+            <h:outputText value="Buscaremos Hoteles en el ID_Municipio" />
+            <h:outputText value="#{hotelSearchBean.getId_municipio()}" />
+        </p:panelGrid>
+    </p:dialog>
+</h:form>
+        </div>
+        <div class="publicidad">
+        <div class="anuncios">
+            <div class="anuncio">
+                <h:graphicImage value="/resources/images/tenerife.jpg"/>
+                <p>Viaja a Santa Cruz de Tenerife</p>
+            </div>
+            <div class="anuncio">
+                <h:graphicImage value="/resources/images/laspalmas.jpg"/>
+                <p>Viaja a las Islas Baleares</p>
+            </div>
+            <div class="anuncio">
+                <h:graphicImage value="/resources/images/oviedo.jpg"/>
+                <p>Viaja a Oviedo, en el Principado de Asturias</p>
+            </div>
+        </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
