@@ -29,9 +29,9 @@
         </p:selectOneMenu>
         <br/><br/>
         <p:outputLabel  for="entrada" value="Fecha de entrada" style="margin-left: 34px"/>
-        <p:inputText id="entrada" type="date" style="margin-left: 15px"></p:inputText>
+        <p:inputText required="true" id="entrada" type="date" style="margin-left: 15px" value="#{shoppingCartBean.fecha1}"></p:inputText>
         <p:outputLabel for="salida" value="Fecha de salida" style="margin-left: 35px"/>
-        <p:inputText id="salida" type="date" style="margin-left: 15px"></p:inputText>
+        <p:inputText required="true" id="salida" type="date" style="margin-left: 15px" value="#{shoppingCartBean.fecha2}"></p:inputText>
         <br/><br/>
         <p:outputLabel  for="hab" value="Habitaciones" style="margin-left: 35px"/>
         <p:inputNumber size="3" id="hab" style="margin-left: 15px"></p:inputNumber>

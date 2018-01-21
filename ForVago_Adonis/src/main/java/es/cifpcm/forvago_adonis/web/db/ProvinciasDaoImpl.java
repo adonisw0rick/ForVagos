@@ -64,7 +64,7 @@ public class ProvinciasDaoImpl implements ProvinciasDao{
                 provincias.add(provincia);
             }
             
-            rs.close();
+            rs.close(); 
             pstmt.close();
             
         } catch (SQLException ex) {

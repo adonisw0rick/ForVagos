@@ -29,7 +29,7 @@ public class HotelSearchBean {
     private List<Municipio> Municipios;
     private List<Provincia> Provincias;
     private List<HotelOffer> Hoteles;
-    private int id_municipio;
+    private int id_municipio = 1;
     private int id_provincia = -1;
     private int hotel_id;
 
@@ -108,9 +108,9 @@ public class HotelSearchBean {
     public List<HotelOffer> getByCriteriaHotelOffer() {
         
             HotelOfferDao hotelOfferDao = (HotelOfferDao) new HotelOfferDaoImpl();
-        Hoteles = hotelOfferDao.selectByCriteria(id_municipio);
+        this.Hoteles = hotelOfferDao.selectByCriteria(this.id_municipio);
         //        Hoteles = hotelOfferDao.selectAll();
-
-        return Hoteles;
+        
+        return this.Hoteles;
     }
 }

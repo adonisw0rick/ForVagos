@@ -7,7 +7,8 @@
                 xmlns:p="http://primefaces.org/ui">
     <ui:define name="content"> 
         eys
-        <h:outputText value="Estás buscando... id_municipio: #{hotelSearchBean.id_municipio}" style="font-weight: bold"/>
+        #{shoppingCartBean.setId_municipio(hotelSearchBean.id_municipio)}
+        <h:outputText value="Se ha encontrado: #{shoppingCartBean.id_municipio}" style="font-weight: bold"/>
         
         <p:selectOneMenu  id="hoteles" value="#{hotelSearchBean.hotel_id}" style="width:125px">
 <f:selectItems value="#{hotelSearchBean.hotelOffer}" var="d"
@@ -21,13 +22,13 @@
         </p:selectOneMenu>
         <!--Si filtro por byCriteriaHotelOffer, no puedo sumar, en cambio si no filtro si puedo sumar...-->
         <h:form id="form"> 
-            <p:repeat value="#{hotelSearchBean.byCriteriaHotelOffer}" var="offer" offset="0"  
+            <p:repeat value="#{shoppingCartBean.byCriteriaHotelOffer}" var="offer" offset="0"  
                       step="1" varStatus="status"> 
                 <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail"> 
                     <p:commandLink update=":form:offerDetail" 
                                    oncomplete="PF('offerDialog').show()">
                         <f:setPropertyActionListener value="#{offer}" 
-                                                     target="#{hotelSearchBean.byCriteriaHotelOffer}" />
+                                                     target="#{shoppingCartBean.byCriteriaHotelOffer}" />
                         <p:graphicImage library="images" name="/#{offer.hotelPicture}" />
                     </p:commandLink>
                 <p:outputPanel>
@@ -36,6 +37,8 @@
                         <h:outputText value="#{offer.hotel}" style="font-weight: bold"/>
                         <h:outputText value="Precio:" /> 
                         <h:outputText value="#{offer.price}" style="font-weight: bold"/> 
+                        <h:outputText value="Noches" /> 
+                        <h:outputText value="#{shoppingCartBean.noches}" style="font-weight: bold"/>
                         <p:commandButton value="Añadir"> 
                             <p:ajax listener="#{shoppingCartBean.addOffer(offer)}" update="lblTotal"/>
                         </p:commandButton>
@@ -44,31 +47,7 @@
             </h:panelGrid>
                 <hr />
             </p:repeat>
-            <h:outputText value="LISTA SIN FILTRAR: #{hotelSearchBean.id_municipio}" style="font-weight: bold"/>
-        
-            <p:repeat value="#{hotelSearchBean.hotelOffer}" var="offer" offset="0"  
-                      step="1" varStatus="status"> 
-                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail"> 
-                    <p:commandLink update=":form:offerDetail" 
-                                   oncomplete="PF('offerDialog').show()">
-                        <f:setPropertyActionListener value="#{offer}" 
-                                                     target="#{hotelResultsBean.selectedOffer}" />
-                        <p:graphicImage library="images" name="/#{offer.hotelPicture}" />
-                    </p:commandLink>
-                <p:outputPanel>
-                    <h:panelGrid columns="2" cellpadding="5"> 
-                        <h:outputText value="Hotel:" />
-                        <h:outputText value="#{offer.hotel}" style="font-weight: bold"/>
-                        <h:outputText value="Precio:" /> 
-                        <h:outputText value="#{offer.price}" style="font-weight: bold"/> 
-                        <p:commandButton value="Añadir"> 
-                            <p:ajax listener="#{shoppingCartBean.addOffer(offer)}" update="lblTotal"/>
-                        </p:commandButton>
-                    </h:panelGrid>
-                </p:outputPanel>
-            </h:panelGrid>
-                <hr />
-            </p:repeat>
+            
             
             <p:dialog header="Información de la oferta" widgetVar="offerDialog" modal="true"
                       showEffect="blind" hideEffect="explode" resizable="false"> 

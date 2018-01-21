@@ -16,7 +16,7 @@
     <h:body>
 
         <div id="top">
-            <ui:insert  name="top"><div style="float: left; width: 10%;"> <h:graphicImage id="carrito" library="images" name="empty-cart-dark_small.png"/> <h:outputText style="color: black;" id="lblTotal" value="#{shoppingCartBean.totalAsString}"/> </div><div style="background-color: white;text-align: center;"><a href="/forvago_adonis/faces/index.xhtml"><h:graphicImage value="../../resources/images/logo.png"/></a> </div><div style="background-color: white;text-align: center;"><p:button href="/faces/login.xhtml" value="Identificarse"></p:button><p:button href="/faces/newCustomer.xhtml" value="Registro"></p:button></div></ui:insert>
+            <ui:insert  name="top"><div style="float: left; width: 10%;"> <a href="/forvago_adonis/faces/search/removeOffers.xhtml"><h:graphicImage id="carrito" library="images" name="empty-cart-dark_small.png"/></a> <h:outputText style="color: black;" id="lblTotal" value="#{shoppingCartBean.totalAsString}"/> </div><div style="background-color: white;text-align: center;"><a href="/forvago_adonis/faces/index.xhtml"><h:graphicImage value="/resources/images/logo.png"/></a> </div><div style="background-color: white;text-align: center;"><p:button href="/faces/login.xhtml" value="Identificarse"></p:button><p:button href="/faces/registro.xhtml" value="Registro"></p:button></div></ui:insert>
         </div>
 
         <div id="content" class="center_content">
